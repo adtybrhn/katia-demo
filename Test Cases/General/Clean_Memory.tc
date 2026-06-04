@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>Clean_Memory</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>a2eb24d6-6ea9-4ba9-93d6-f28f087c61ce</testCaseGuid>
+</TestCaseEntity>
