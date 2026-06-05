@@ -9,16 +9,6 @@
    <testSuiteRunConfigurations>
       <TestSuiteRunConfiguration>
          <configuration>
-            <groupName>Web Desktop</groupName>
-            <profileName>default</profileName>
-            <requireConfigurationData>false</requireConfigurationData>
-            <runConfigurationId>Chrome (headless)</runConfigurationId>
-         </configuration>
-         <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/General/TS_Clean_Memory</testSuiteEntity>
-      </TestSuiteRunConfiguration>
-      <TestSuiteRunConfiguration>
-         <configuration>
             <groupName>Mobile</groupName>
             <profileName>default</profileName>
             <requireConfigurationData>true</requireConfigurationData>

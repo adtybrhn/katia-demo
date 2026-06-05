@@ -131,6 +131,13 @@ public class KatiaReporter {
 		process.waitFor()
 
 		println("[V] Laporan Master PDF sukses dibuat: " + dynamicFileName)
+
+		// ========================================================
+		// FITUR BARU: AUTO-TEARDOWN (Pembersihan Otomatis)
+		// ========================================================
+		println("[+] Melakukan pembersihan otomatis (menghapus result.json & screenshots)...")
+		cleanUpOldReport()
+		println("[V] Lingkungan pengujian telah bersih kembali.")
 	}
 }
 
