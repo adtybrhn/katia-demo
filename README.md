@@ -6,33 +6,35 @@ Repositori ini adalah proyek demonstrasi untuk eksekusi pengujian perangkat luna
 
 ## ✨ Fitur Utama
 
-* **Modular Master-Slave Architecture:** Pengujian dipisah ke dalam *Test Suites* spesifik (Setup, Web, Mobile, API, Report) yang diorkestrasi melalui *Test Suite Collection* agar terhindar dari konflik antar *driver* (Web vs Mobile).
+* **Modular Master-Slave Architecture:** Pengujian dipisah ke dalam *Test Suites* spesifik (Mobile, Web, API, Report) yang diorkestrasi melalui *Test Suite Collection* agar terhindar dari konflik antar *driver* (Web vs Mobile).
+* **Native Groovy Implementation:** Menggunakan *Class Groovy* murni di dalam direktori `Include/scripts` tanpa bergantung pada fitur *Custom Keyword* Katalon, membuat pemanggilan *method* lebih cepat dan berorientasi objek (OOP).
 * **Smart Anti-Duplicate Logging:** Menggunakan file `result.json` sebagai penyimpan data (*state management*) antarsesi, dilengkapi dengan logika *idempotent* untuk mencegah *ghost data* saat terjadi *retry* otomatis.
-* **Native Screenshot Bypass:** Mekanisme penangkapan layar (*screenshot*) tingkat lanjut yang langsung mengakses *Native Selenium/Appium Driver* untuk menghindari *StepFailedException* bawaan Katalon jika layar *freeze*.
-* **Unified Master PDF:** Seluruh bukti pengujian (status *Pass/Fail*, *payload* API, dan tangkapan layar UI) dari berbagai platform dijahit secara otomatis menjadi 1 dokumen PDF yang sangat profesional dan mudah dibaca oleh *stakeholders*.
+* **Native Screenshot Bypass:** Mekanisme penangkapan layar (*screenshot*) tingkat lanjut yang langsung mengakses *Native Selenium/Appium Driver* untuk menghindari *StepFailedException* jika terjadi *freeze* pada UI.
+* **Unified Master PDF & Auto-Teardown:** Seluruh bukti pengujian dari berbagai platform dijahit secara otomatis menjadi 1 dokumen PDF profesional. Setelah PDF berhasil dicetak, sistem akan melakukan *Auto-Teardown* (pembersihan otomatis) pada *file temporary* agar lingkungan (*environment*) selalu bersih untuk eksekusi berikutnya.
 
 ## 📂 Struktur Repositori & Arsitektur
 
-Proyek ini menggunakan 5 pilar *Test Suite* utama yang berjalan secara **Sequential**:
+Proyek ini menggunakan struktur kelas *utility* dan 4 pilar *Test Suite* utama yang berjalan secara **Sequential**:
 
 ```text
 katia-demo/
 │
-├── Keywords/
-│   └── KatiaReporter.groovy      # Mesin utama (Custom Keyword) untuk manipulasi JSON & pemanggilan PDF
+├── Include/
+│   └── scripts/
+│       └── groovy/
+│           └── KatiaReporter.groovy      # Class utility utama (Default Package) untuk manipulasi JSON & PDF
 │
 ├── katia_report/                 
 │   ├── katia-report.exe          # Executable Node.js rendering PDF (jsPDF)
-│   ├── result.json               # Temporary memory saat Test Suite berjalan
-│   └── screenshots/              # Folder penyimpanan sementara gambar terkompresi
+│   ├── result.json               # Temporary memory saat Test Suite berjalan (terhapus otomatis di akhir)
+│   └── screenshots/              # Folder penyimpanan sementara gambar (terhapus otomatis di akhir)
 │
 └── Test Suites/
     └── TSC_Master_E2E (Collection)
-        ├── 1. TS_SETUP           # (Web Service) Menghapus sisa cache, JSON, dan gambar eksekusi sebelumnya
-        ├── 2. TS_MOBILE          # (Android) Mengeksekusi Mobile App Testing (ex: Swag Labs)
-        ├── 3. TS_WEB             # (Chrome) Mengeksekusi Web Testing
-        ├── 4. TS_API             # (Web Service) Mengeksekusi REST API Testing
-        └── 5. TS_REPORT          # (Web Service) Memicu Katia-Report untuk merender result.json menjadi PDF
+        ├── 1. TS_MOBILE          # (Android) Mengeksekusi Mobile App Testing (ex: Swag Labs)
+        ├── 2. TS_WEB             # (Chrome) Mengeksekusi Web Testing
+        ├── 3. TS_API             # (Web Service) Mengeksekusi REST API Testing
+        └── 4. TS_REPORT          # (Web Service) Merender PDF & eksekusi Auto-Teardown (Pembersihan memori)
 
 ```
 
@@ -42,17 +44,17 @@ Sebelum menjalankan proyek ini di mesin lokal Anda, pastikan Anda telah menginst
 
 1. **Katalon Studio** (Direkomendasikan versi 8.x atau terbaru).
 2. **Appium & Android SDK** (Untuk mengeksekusi `TS_MOBILE`).
-3. **Katia-Report Executable:** Pastikan file `katia-report.exe` sudah berada di dalam folder `katia_report/` di root proyek ini. *(Anda bisa mem-buildnya dari source `index.js` menggunakan `pkg`)*.
+3. **Katia-Report Executable:** Pastikan file `katia-report.exe` sudah berada di dalam folder `katia_report/` di *root* proyek ini.
 
 ## 🚀 Cara Menjalankan Eksekusi (How to Run)
 
 1. Buka proyek ini menggunakan Katalon Studio.
 2. Navigasikan ke panel **Test Suites** -> Buka **`TSC_Master_E2E`** (Test Suite Collection).
 3. Pastikan **Execution Mode** disetel ke **Sequential**.
-4. Pastikan profil *Environment* di tabel sudah sesuai (Chrome untuk Web, Android untuk Mobile, Web Service untuk Setup & Report).
+4. Pastikan profil *Environment* pada kolom **Run With** sudah sesuai (Android untuk Mobile, Chrome untuk Web, Web Service untuk API & Report).
 5. Klik tombol **Execute**.
 6. Katalon akan menjalankan orkestrasi lintas platform secara otomatis.
-7. Setelah eksekusi selesai, buka folder `katia_report/` di komputer Anda. Anda akan menemukan file laporan dengan format `[ID]_[Nama]_[Timestamp].pdf`.
+7. Setelah eksekusi selesai, buka folder `katia_report/`. Anda akan menemukan file laporan utuh dengan format `[ID]_[Nama]_[Timestamp].pdf`, dan folder tersebut akan langsung bersih dari *file* gambar/JSON *temporary* berkat fitur *Auto-Teardown*.
 
 ## 📜 Contoh Output Laporan
 
@@ -60,9 +62,9 @@ Sebelum menjalankan proyek ini di mesin lokal Anda, pastikan Anda telah menginst
 
 1. **Halaman Cover:** Detail proyek, tanggal eksekusi, dan daftar *Test Case*.
 2. **Ringkasan Eksekusi:** *Dashboard* jumlah total tes, status *PASSED*, dan *FAILED*.
-3. **Detail Eksekusi (Tabel):** Daftar komprehensif seluruh status ID.
+3. **Detail Eksekusi (Tabel):** Daftar komprehensif seluruh status ID E2E.
 4. **Lampiran Step & Bukti Data:** Rincian setiap langkah (*step-by-step*), *payload* (untuk API), dan kompresi gambar tangkapan layar (untuk Web/Mobile).
 
 ---
 
-*Dibuat untuk menyederhanakan pelaporan SIT/UAT pada pengujian Hybrid berskala besar.*
+*Arsitektur E2E Testing Automation - Dirancang untuk menyederhanakan pelaporan SIT/UAT lintas platform secara profesional.*
