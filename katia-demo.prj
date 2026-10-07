@@ -8,10 +8,10 @@
    <createdVersion>9.7.6</createdVersion>
    <freeLicense>true</freeLicense>
    <migratedVersion>5.9.0</migratedVersion>
-   <modifiedEdition>FREE</modifiedEdition>
-   <modifiedVersion>9.7.6</modifiedVersion>
+   <modifiedEdition>ENTERPRISE</modifiedEdition>
+   <modifiedVersion>10.4.3</modifiedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
-   <projectFileLocation>D:\COE\project_katalon\latihan\katia-demo\katia-demo.prj</projectFileLocation>
+   <projectFileLocation>D:\Project\Personal\github\katia-demo\katia-demo.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>

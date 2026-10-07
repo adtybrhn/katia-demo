@@ -1,18 +1,22 @@
+# Node.js Dependencies
+node_modules/
+
+# Katia Script
+katia.js
+
+# Temporary Files & Build artifacts (Opsional tapi disarankan)
+katia_report/result.json
+katia_report/screenshots/
+
 .gradle
-
 bin
-
 Reports
-
 Libs
-
 output
-
 !output/.gitkeep
 build
-
 .classpath
-
 .project
-
 .cache
+
+package.json

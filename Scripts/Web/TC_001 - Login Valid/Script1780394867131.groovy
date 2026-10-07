@@ -7,10 +7,9 @@ import Login_Menu as Login
 try {
 	Login.openBrowser()
 	Login.login()
-	KatiaReporter.addTestResult("TC-001", "Verifikasi Login Valid", "PASSED")
-
+	KatiaReporter.addTestResult("TC-001", "Verifikasi Login Valid", "DONE")
 } catch (Exception e) {
-	KatiaReporter.addTestResult("TC-001", "Verifikasi Login Valid", "FAILED")
+	KatiaReporter.addTestResult("TC-001", "Verifikasi Login Valid", "INCOMPLETE")
 	KeywordUtil.markFailed("Test Gagal: " + e.getMessage())	
 } finally {
 	WebUI.closeBrowser()

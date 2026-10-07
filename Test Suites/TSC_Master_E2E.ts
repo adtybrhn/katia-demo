@@ -9,26 +9,6 @@
    <testSuiteRunConfigurations>
       <TestSuiteRunConfiguration>
          <configuration>
-            <groupName>Mobile</groupName>
-            <profileName>default</profileName>
-            <requireConfigurationData>true</requireConfigurationData>
-            <runConfigurationData>
-               <entry>
-                  <key>deviceName</key>
-                  <value>samsung SM-A525F (Android 14)</value>
-               </entry>
-               <entry>
-                  <key>deviceId</key>
-                  <value>RR8R8097ECH</value>
-               </entry>
-            </runConfigurationData>
-            <runConfigurationId>Android</runConfigurationId>
-         </configuration>
-         <runEnabled>true</runEnabled>
-         <testSuiteEntity>Test Suites/TS_MOBILE</testSuiteEntity>
-      </TestSuiteRunConfiguration>
-      <TestSuiteRunConfiguration>
-         <configuration>
             <groupName>Web Desktop</groupName>
             <profileName>default</profileName>
             <requireConfigurationData>false</requireConfigurationData>
