@@ -2,14 +2,13 @@
   "name": "qa-reporter",
   "version": "1.0.0",
   "description": "CLI tool untuk men-generate laporan PDF dari hasil eksekusi automation test Katalon/Katia",
-  "main": "index.js",
+  "main": "katia.js",
   "bin": {
-    "qa-reporter": "./index.js"
+    "qa-reporter": "./katia.js"
   },
   "scripts": {
-    "start": "node index.js",
-    "build": "pkg .",
-    "build:win": "pkg . --targets node18-win-x64 --output build/qa-reporter.exe"
+    "start": "node katia.js",
+    "build": "pkg katia.js --target node18-win-x64 --output katia-report.exe"
   },
   "dependencies": {
     "commander": "^11.1.0",
