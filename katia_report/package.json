@@ -1,0 +1,34 @@
+{
+  "name": "qa-reporter",
+  "version": "1.0.0",
+  "description": "CLI tool untuk men-generate laporan PDF dari hasil eksekusi automation test Katalon/Katia",
+  "main": "index.js",
+  "bin": {
+    "qa-reporter": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "build": "pkg .",
+    "build:win": "pkg . --targets node18-win-x64 --output build/qa-reporter.exe"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "assets": [
+      "logo/**/*"
+    ],
+    "targets": [
+      "node18-win-x64",
+      "node18-linux-x64",
+      "node18-macos-x64"
+    ]
+  },
+  "author": "PT. Mencari Cinta Sejati",
+  "license": "ISC"
+}
